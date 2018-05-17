@@ -5,29 +5,37 @@
 	<header th:replace="base :: header" />
 	<div class="container">
 		<main>
-		<form th:action="@{/todos/add}" th:object="${todo}" method="post">
-			<p>
-				Description: <input type="text" th:field="*{description}" required />
-			</p>
-			<p>
-				Done?: <input type="checkbox" th:field="*{isDone}" />
-			</p>
-			<p>
-				Priority: <select th:field="*{priority.id}">
-					<option th:each="priority : ${priorities}"
-						th:value="${priority.id}" th:text="${priority.description}"></option>
-				</select>
-			</p>
-			<p>
-				Deadline: <input type="date" th:field="*{deadline}" required
-					onkeydown="return false" />
-			</p>
-			<div class="row">
-				<input type="submit" value="Save" class="btn btn-success" />
-		</form>
-		<form th:action="@{'/'}">
-			<input type="submit" value="Cancel" class="btn btn-danger" />
-		</form>
+		<div class="col-md-6">
+			<form th:action="@{/todos/add}" th:object="${todo}" method="post">
+				<div class="form-group">
+					<label for="description">Description</label> <input type="text"
+						th:field="*{description}" required class="form-control"
+						id="description" />
+				</div>
+
+				<div class="form-group">
+					<label for="priority">Priority</label> <select
+						th:field="*{priority.id}" class="form-control" id="priority">
+						<option th:each="priority : ${priorities}"
+							th:value="${priority.id}" th:text="${priority.description}"></option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="deadline">Deadline</label> <input type="date"
+						th:field="*{deadline}" required onkeydown="return false"
+						class="form-control" />
+				</div>
+				<div class="form-check">
+					<label for="isDone">Done?</label> <input type="checkbox"
+						th:field="*{isDone}" id="isDone" />
+				</div>
+				<div class="row">
+					<input type="submit" value="Save" class="btn btn-success" />
+			</form>
+			<form th:action="@{'/'}">
+				<input type="submit" value="Cancel" class="btn btn-danger" />
+			</form>
+		</div>
 	</div>
 	</main>
 	</div>
