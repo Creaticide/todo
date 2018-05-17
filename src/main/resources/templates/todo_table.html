@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<div class="row col-md-12" th:fragment="todo-table">
+	<table class="table">
+		<thead class="thead-dark">
+			<tr>
+				<th>Description</th>
+				<th>Done?</th>
+				<th>Priority</th>
+				<th>Deadline</th>
+				<th>Created</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="todo : ${todos}">
+				<td th:text="${todo.description}"></td>
+				<td th:if="${todo.isDone}"><i class="far fa-check-square"></i></td>
+				<td th:unless="${todo.isDone}"><i class="far fa-square"></i></td>
+				<td th:text="${todo.priority.description}"></td>
+				<td th:text="${todo.deadline}"></td>
+				<td th:text="${todo.createdDate}"></td>
+				<td><a th:href="@{'/todos/' + ${todo.id} + '/edit'}"><i
+						class="fas fa-edit"></i></a></td>
+				<td><a th:href="@{'/todos/' + ${todo.id} + '/delete'}"><i
+						class="fas fa-trash-alt delete-icon"></i></a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</html>

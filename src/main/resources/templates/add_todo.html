@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base :: head" />
+<body>
+	<header th:replace="base :: header" />
+	<div class="container">
+		<main>
+		<form th:action="@{/todos/add}" th:object="${todo}" method="post">
+			<p>
+				Description: <input type="text" th:field="*{description}" required />
+			</p>
+			<p>
+				Done?: <input type="checkbox" th:field="*{isDone}" />
+			</p>
+			<p>
+				Priority: <select th:field="*{priority.id}">
+					<option th:each="priority : ${priorities}"
+						th:value="${priority.id}" th:text="${priority.description}"></option>
+				</select>
+			</p>
+			<p>
+				Deadline: <input type="date" th:field="*{deadline}" required
+					onkeydown="return false" />
+			</p>
+			<div class="row">
+				<input type="submit" value="Save" class="btn btn-success" />
+		</form>
+		<form th:action="@{'/'}">
+			<input type="submit" value="Cancel" class="btn btn-danger" />
+		</form>
+	</div>
+	</main>
+	</div>
+</body>
+</html>
