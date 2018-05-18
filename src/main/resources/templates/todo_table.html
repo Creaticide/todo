@@ -16,8 +16,8 @@
 		<tbody>
 			<tr th:each="todo : ${todos}">
 				<td th:text="${todo.description}"></td>
-				<td th:if="${todo.isDone}"><i class="far fa-check-square"></i></td>
-				<td th:unless="${todo.isDone}"><i class="far fa-square"></i></td>
+				<td th:if="${todo.isDone}"><a th:href="@{'/todos/' + ${todo.id} + '/done'}"><i class="far fa-check-square"></i></a></td>
+				<td th:unless="${todo.isDone}"><a th:href="@{'/todos/' + ${todo.id} + '/done'}"><i class="far fa-square"></i></a></td>
 				<td th:text="${todo.priority.description}"></td>
 				<td th:text="${todo.deadline}"></td>
 				<td th:text="${todo.createdDate}"></td>

@@ -2,6 +2,7 @@ package com.testi.TodoApp.controller;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.Optional;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -66,6 +67,21 @@ public class TodoController {
 	@PostMapping("/todos/{id}/edit")
 	public String editTodo(@ModelAttribute Todo todo) {
 		this.todoRepository.save(todo);
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/todos/{id}/done")
+	public String setDone(@PathVariable Long id, Model model) {
+		Optional<Todo> todo = this.todoRepository.findById(id);
+		if (todo.isPresent()) {
+			Todo t = todo.get();
+			if (t.getIsDone()) {
+				t.setIsDone(false);
+			} else {
+				t.setIsDone(true);				
+			}
+			this.todoRepository.save(t);
+		}
 		return "redirect:/";
 	}
 	
